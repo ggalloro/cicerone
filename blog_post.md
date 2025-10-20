@@ -14,33 +14,7 @@ This separation of concerns allows each agent to focus on a specific task, leadi
 
 ## Agent Implementation with the ADK
 
-The agents are implemented using the `LlmAgent` class from the Google ADK. Here is a code snippet from `agent.py` that shows how the `ArtHistorian` agent is defined:
-
-```python
-art_historian_agent = LlmAgent(
-    name="ArtHistorian",
-    model=MODEL,
-    instruction="""You are an art historian. Suggest monuments, museums, and cultural sites in Rome based on the user's artistic and historical interests.
-    Use Google Search to find up-to-date information on temporary exhibitions and special events.""",
-    description="Suggests cultural sites in Rome based on user interests.",
-    tools=[google_search]
-)
-```
-
-The `Gourmet` agent is defined in a similar way:
-
-```python
-gourmet_agent = LlmAgent(
-    name="Gourmet",
-    model=MODEL,
-    instruction="""You are a food critic. Suggest restaurants, trattorias, markets, and specialty food shops in Rome in line with the user's budget and culinary preferences.
-    Use Google Search to find recent reviews, price ranges, and specialties.""",
-    description="Suggests dining and food experiences in Rome.",
-    tools=[google_search]
-)
-```
-
-The `Cicerone` root agent uses the other agents as tools:
+The agents are implemented using the `LlmAgent` class from the Google ADK. The `Cicerone` root agent is the main orchestrator that uses the other agents as tools to build the itinerary. Here is the code snippet from `agent.py` that shows how the `Cicerone` agent is defined:
 
 ```python
 root_agent = LlmAgent(
@@ -57,6 +31,30 @@ root_agent = LlmAgent(
         AgentTool(agent=gourmet_agent),
         AgentTool(agent=logistics_agent),
     ]
+)
+```
+
+The specialized agents are defined as follows:
+
+```python
+art_historian_agent = LlmAgent(
+    name="ArtHistorian",
+    model=MODEL,
+    instruction="""You are an art historian. Suggest monuments, museums, and cultural sites in Rome based on the user's artistic and historical interests.
+    Use Google Search to find up-to-date information on temporary exhibitions and special events.""",
+    description="Suggests cultural sites in Rome based on user interests.",
+    tools=[google_search]
+)
+```
+
+```python
+gourmet_agent = LlmAgent(
+    name="Gourmet",
+    model=MODEL,
+    instruction="""You are a food critic. Suggest restaurants, trattorias, markets, and specialty food shops in Rome in line with the user's budget and culinary preferences.
+    Use Google Search to find recent reviews, price ranges, and specialties.""",
+    description="Suggests dining and food experiences in Rome.",
+    tools=[google_search]
 )
 ```
 
