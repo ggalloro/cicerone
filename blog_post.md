@@ -1,10 +1,10 @@
 # Building a Multi-Agent Travel Assistant for Rome with Google's ADK
 
-I've been thinking for a while about creating a tool to help tourists navigate the rich history and culture of Rome. This led me to explore the Google Agent Development Kit (ADK) to build a personalized travel assistant. The ADK is a framework for building, evaluating, and deploying agents. It provides a set of tools and libraries that simplify the development process. This blog post describes the result: Cicerone Romano, a multi-agent system designed to create tailored itineraries for visitors to the Eternal City.
+I've been thinking for a while about creating a tool to help tourists navigate the rich history and culture of Rome. This led me to explore the Google Agent Development Kit (ADK) to build a personalized travel assistant. The ADK is a framework for building, evaluating, and deploying agents. It provides a set of tools and libraries that simplify the development process. This blog post describes the result: Cicerone, a multi-agent system designed to create tailored itineraries for visitors to the Eternal City.
 
 ## A Multi-Agent Architecture for Personalized Itineraries
 
-The Cicerone Romano agent uses a multi-agent architecture to handle the different aspects of travel planning. A root agent, `CiceroneRomano`, coordinates the work of three specialized agents:
+The Cicerone agent uses a multi-agent architecture to handle the different aspects of travel planning. A root agent, `Cicerone`, coordinates the work of three specialized agents:
 
 - **`ArtHistorian`**: This agent is responsible for suggesting monuments, museums, and cultural sites based on the user's artistic and historical interests.
 - **`Gourmet`**: This agent focuses on the culinary aspect of the trip, recommending restaurants, markets, and food shops that match the user's budget and preferences.
@@ -40,11 +40,11 @@ gourmet_agent = LlmAgent(
 )
 ```
 
-The `CiceroneRomano` root agent uses the other agents as tools:
+The `Cicerone` root agent uses the other agents as tools:
 
 ```python
 root_agent = LlmAgent(
-    name="CiceroneRomano",
+    name="Cicerone",
     model=MODEL,
     instruction="""You are a helpful travel assistant for Rome. Your goal is to create a personalized itinerary.
 - First, understand the user's needs: their interests, available time, and budget. Ask clarifying questions if needed.
@@ -79,6 +79,6 @@ logistics_agent = LlmAgent(
 
 ## Generalization and Conclusion
 
-While the Cicerone Romano agent is specific to Rome, the underlying architecture can be generalized to create a travel assistant for any city. By replacing the Rome-specific instructions with more general ones and providing the agent with the ability to identify the user's desired location, the same multi-agent approach can be used to create a flexible and powerful travel planning tool.
+While the Cicerone agent is specific to Rome, the underlying architecture can be generalized to create a travel assistant for any city. By replacing the Rome-specific instructions with more general ones and providing the agent with the ability to identify the user's desired location, the same multi-agent approach can be used to create a flexible and powerful travel planning tool.
 
 This example demonstrates how the Google Agent Development Kit can be used to build a sophisticated, multi-agent system for a real-world application. The new `google_maps_grounding` tool, in particular, opens up new possibilities for creating location-aware and contextually relevant agents.

@@ -38,7 +38,7 @@ logistics_agent = LlmAgent(
 
 
 root_agent = LlmAgent(
-    name="CiceroneRomano",
+    name="Cicerone",
     model=MODEL,
     instruction="""You are a helpful travel assistant for Rome. Your goal is to create a personalized itinerary.
 - First, understand the user's needs: their interests, available time, and budget. Ask clarifying questions if needed.

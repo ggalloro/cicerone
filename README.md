@@ -1,6 +1,6 @@
-# Cicerone Romano
+# Cicerone
 
-Cicerone Romano is a multi-agent system for creating personalized tourist itineraries in Rome. It uses a root agent, CiceroneRomano, that coordinates three specialized agents to provide tailored recommendations for art, food, and logistics.
+Cicerone is a multi-agent system for creating personalized tourist itineraries in Rome. It uses a root agent, Cicerone, that coordinates three specialized agents to provide tailored recommendations for art, food, and logistics.
 
 ## Application Capabilities
 
@@ -16,7 +16,7 @@ The application provides the following capabilities:
 The application is structured as a multi-agent system using the Google Agent Development Kit (ADK).
 
 - **`cicerone-agent/agent.py`**: This file contains the core logic of the application, including the definition of the four agents:
-    - `CiceroneRomano`: The root agent that orchestrates the other agents.
+    - `Cicerone`: The root agent that orchestrates the other agents.
     - `ArtHistorian`: The agent specialized in art and history.
     - `Gourmet`: The agent specialized in food and dining.
     - `Logistics`: The agent specialized in itinerary planning and logistics.
