@@ -31,7 +31,7 @@ logistics_agent = LlmAgent(
     name="Logistics",
     model=MODEL,
     instruction="""You are a logistic expert. Organize the suggestions from the other agents into a coherent and optimized itinerary.
-    Estimate the best route and travel times between points of interest using Google Maps grounding tool. Return routes, transportation advice and travel times.""",
+    Estimate the best route and travel times between the places suggesteed by the other 2 agents using the google_maps_grounding tool. Return routes, transportation advice and travel times.""",
     description="Organizes suggestions into a structured itinerary.",
     tools=[google_maps_grounding]
 )
