@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from google.adk.agents import LlmAgent
+from google.adk.agents import LlmAgent, Agent
 from google.adk.tools import google_search
 from google.adk.tools.agent_tool import AgentTool
 from google.adk.tools import google_maps_grounding
@@ -9,7 +9,7 @@ load_dotenv()
 
 MODEL = os.getenv("MODEL", "gemini-2.5-flash")
 
-art_historian_agent = LlmAgent(
+art_historian_agent = Agent(
     name="ArtHistorian",
     model=MODEL,
     instruction="""You are an art historian. Suggest monuments, museums, and cultural sites in Rome based on the user's artistic and historical interests.
@@ -18,7 +18,7 @@ art_historian_agent = LlmAgent(
     tools=[google_search]
 )
 
-gourmet_agent = LlmAgent(
+gourmet_agent = Agent(
     name="Gourmet",
     model=MODEL,
     instruction="""You are a food critic. Suggest restaurants, trattorias, markets, and specialty food shops in Rome in line with the user's budget and culinary preferences.
@@ -27,17 +27,17 @@ gourmet_agent = LlmAgent(
     tools=[google_search]
 )
 
-logistics_agent = LlmAgent(
+logistics_agent = Agent(
     name="Logistics",
     model=MODEL,
     instruction="""You are a logistic expert. Organize the suggestions from the other agents into a coherent and optimized itinerary.
-    Estimate the best route and travel times between the places suggesteed by the other 2 agents using the google_maps_grounding tool. Return routes, transportation advice and travel times.""",
+    Estimate the best route and travel times between the places suggested by the other 2 agents using the google_maps_grounding tool. Return routes, transportation advice and travel times.""",
     description="Organizes suggestions into a structured itinerary.",
     tools=[google_maps_grounding]
 )
 
 
-root_agent = LlmAgent(
+root_agent = Agent(
     name="Cicerone",
     model=MODEL,
     instruction="""You are a helpful travel assistant for Rome. Your goal is to create a personalized itinerary.
