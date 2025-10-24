@@ -1,10 +1,9 @@
 import os
 from google.adk.agents import LlmAgent
-from google.adk.tools import google_search
+from google.adk.tools import google_search, google_maps_grounding
 from google.adk.tools.agent_tool import AgentTool
-from google.adk.tools import google_maps_grounding
 
-MODEL = os.getenv("MODEL", "gemini-1.5-flash")
+MODEL = os.getenv("MODEL", "gemini-2.5-flash")
 
 art_historian_agent = LlmAgent(
     name="ArtHistorian",

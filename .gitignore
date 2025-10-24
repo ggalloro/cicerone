@@ -19,7 +19,6 @@ cloudsql/
 .venv/
 uploads/*
 test_*
-llm*
 
 
 
