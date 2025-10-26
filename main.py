@@ -7,7 +7,7 @@ from pydantic import BaseModel
 from fastapi import Request
 
 # The directory containing the agent packages
-AGENT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+AGENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # In-memory session storage for simplicity
 SESSION_DB_URL = "sqlite:///./sessions.db"
@@ -20,11 +20,11 @@ app = get_fast_api_app(
 )
 
 # Mount the static directory to serve HTML, CSS, JS
-app.mount("/static", StaticFiles(directory="cicerone-agent/static"), name="static")
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.get("/")
 async def read_index():
-    return FileResponse('cicerone-agent/static/index.html')
+    return FileResponse('static/index.html')
 
 class Itinerary(BaseModel):
     session_id: str
@@ -32,7 +32,7 @@ class Itinerary(BaseModel):
 
 @app.post("/save-itinerary")
 async def save_itinerary(itinerary: Itinerary):
-    itineraries_dir = "cicerone-agent/itineraries"
+    itineraries_dir = "itineraries"
     if not os.path.exists(itineraries_dir):
         os.makedirs(itineraries_dir)
     
