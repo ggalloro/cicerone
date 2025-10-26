@@ -1,4 +1,6 @@
-# Building a Personalized Travel Assistant with Google's ADK and the new Google Maps Grounding tool
+# Cicerone: an ADK Travel Agent using Google Maps grounding
+Building a Personalized Travel Assistant with Google's ADK and the new Google Maps Grounding tool
+
 
 This post describes the process of creating a tool to help users plan trips. The project uses the Google Agent Development Kit (ADK) to build a personalized travel assistant. A key aspect of this project is the integration of the `google_maps_grounding` tool, which allows the agent to access real-world geographical data from Google Maps. The result is Cicerone, an agent designed to create tailored itineraries for any location.
 
