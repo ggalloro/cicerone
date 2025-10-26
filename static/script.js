@@ -1,13 +1,12 @@
 document.getElementById('itinerary-form').addEventListener('submit', async function(event) {
     event.preventDefault();
 
-            const city = document.getElementById('city').value;
-            const interests = document.getElementById('interests').value;
-            const budget = document.getElementById('budget').value;
-            const time = document.getElementById('time').value;
-    
-            const prompt = `I want to plan a trip to ${city}. My interests are ${interests}. My budget is ${budget} and I have ${time} available.`;
-    const responseDiv = document.getElementById('response');
+                    const location = document.getElementById('location').value;
+                    const interests = document.getElementById('interests').value;
+                    const budget = document.getElementById('budget').value;
+                    const time = document.getElementById('time').value;
+            
+                    const prompt = `I want to plan a trip to ${location}. My interests are ${interests}. My budget is ${budget} and I have ${time} available.`;    const responseDiv = document.getElementById('response');
     responseDiv.textContent = 'Generating itinerary...';
 
     const app_name = 'cicerone-agent';

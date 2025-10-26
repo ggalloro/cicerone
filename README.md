@@ -1,12 +1,12 @@
 # Cicerone
 
-Cicerone is an AI-powered travel assistant that creates personalized tourist itineraries for any city in the world. It uses a single, powerful agent to understand your preferences and generate a detailed plan for your trip.
+Cicerone is an AI-powered travel assistant that creates personalized tourist itineraries for any location (city, region, or country) in the world. It uses a single, powerful agent to understand your preferences and generate a detailed plan for your trip.
 
 ## Application Capabilities
 
 The application provides the following capabilities:
 
-- **Personalized Itineraries for Any City:** Simply tell the agent which city you want to visit, your interests, budget, and available time, and it will generate a custom itinerary for you.
+- **Personalized Itineraries for Any Location:** Simply tell the agent which location you want to visit, your interests, budget, and available time, and it will generate a custom itinerary for you.
 - **Detailed Suggestions:** The agent uses Google Maps to find attractions and highly-rated restaurants that match your interests.
 - **Optimized Planning:** The itinerary includes an optimized schedule with routes, travel times, and public transportation advice (like bus or metro lines).
 - **Web Interface:** An intuitive web interface allows you to easily input your travel preferences and view the generated itinerary.
@@ -51,7 +51,7 @@ To run the application locally, follow these steps:
 ## How to Use
 
 1.  Open the web application in your browser.
-2.  Fill in the form with the city you want to visit, your interests, budget, and the duration of your trip.
+2.  Fill in the form with the location you want to visit, your interests, budget, and the duration of your trip.
 3.  Click the "Generate Itinerary" button.
 4.  The agent will process your request and display a complete itinerary.
 5.  You can then edit the itinerary directly on the page and save it using the "Save Changes" button.
