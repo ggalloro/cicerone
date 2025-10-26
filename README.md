@@ -1,27 +1,30 @@
 # Cicerone
 
-Cicerone is a multi-agent system for creating personalized tourist itineraries in Rome. It uses a root agent, Cicerone, that coordinates three specialized agents to provide tailored recommendations for art, food, and logistics.
+Cicerone is an AI-powered travel assistant that creates personalized tourist itineraries for any city in the world. It uses a single, powerful agent to understand your preferences and generate a detailed plan for your trip.
 
 ## Application Capabilities
 
 The application provides the following capabilities:
 
-- **Personalized Art and History Recommendations:** The ArtHistorian agent suggests monuments, museums, and cultural sites based on the user's artistic and historical interests.
-- **Tailored Culinary Suggestions:** The Gourmet agent recommends restaurants, trattorias, markets, and specialty food shops in line with the user's budget and culinary preferences.
-- **Optimized Itinerary Planning:** The Logistics agent organizes the suggestions from the other agents into a coherent and optimized itinerary, estimating the best routes and travel times between points of interest.
-- **Natural Language Interaction:** Users can interact with the application in natural language to specify their interests and receive a complete, easy-to-read itinerary.
+- **Personalized Itineraries for Any City:** Simply tell the agent which city you want to visit, your interests, budget, and available time, and it will generate a custom itinerary for you.
+- **Detailed Suggestions:** The agent uses Google Maps to find attractions and highly-rated restaurants that match your interests.
+- **Optimized Planning:** The itinerary includes an optimized schedule with routes, travel times, and public transportation advice (like bus or metro lines).
+- **Web Interface:** An intuitive web interface allows you to easily input your travel preferences and view the generated itinerary.
+- **Save and Modify:** You can edit the generated itinerary directly in the browser and save it for later use.
 
 ## Structure
 
-The application is structured as a multi-agent system using the Google Agent Development Kit (ADK).
+The application is built using the Google Agent Development Kit (ADK) and served via a FastAPI web server.
 
-- **`cicerone-agent/agent.py`**: This file contains the core logic of the application, including the definition of the four agents:
-    - `Cicerone`: The root agent that orchestrates the other agents.
-    - `ArtHistorian`: The agent specialized in art and history.
-    - `Gourmet`: The agent specialized in food and dining.
-    - `Logistics`: The agent specialized in itinerary planning and logistics.
-- **`requirements.txt`**: This file lists the Python dependencies of the application, which are `google-adk` and `python-dotenv`.
-- **`.env`**: This file is used to store environment variables, such as the model name.
+- **`cicerone-agent/`**: This directory contains the core ADK agent definition.
+  - **`agent.py`**: Defines the `Cicerone` agent, its instructions, and the tools it uses.
+- **`main.py`**: The FastAPI web server that exposes the agent and serves the frontend application.
+- **`static/`**: Contains the frontend files.
+  - **`index.html`**: The main HTML page with the user interface.
+  - **`script.js`**: The JavaScript code that handles user input and communication with the agent's API.
+- **`itineraries/`**: The directory where saved itineraries are stored as text files.
+- **`requirements.txt`**: Lists the Python dependencies for the project.
+- **`.env`**: Used to store environment variables, such as API keys.
 
 ## How to Run Locally
 
@@ -32,21 +35,23 @@ To run the application locally, follow these steps:
    pip install -r requirements.txt
    ```
 2. **Set up the environment variables:**
-   Create a `.env` file in the root of the project and add the following line:
+   Create a `.env` file in the root of the project and add your Google API key:
    ```
    MODEL=gemini-2.5-flash
+   # Add your Google API key if not using Vertex AI
+   # GOOGLE_API_KEY=YOUR_API_KEY
    ```
-3. **Run the agent:**
+3. **Run the web server:**
    ```bash
-   adk run cicerone-agent
+   python -m uvicorn main:app --reload
    ```
+4. **Access the application:**
+   Open your web browser and go to `http://127.0.0.1:8000`.
 
-## How to Test
+## How to Use
 
-To test the application, you can use the `adk` command-line interface. Once the agent is running, you can send messages to it to test its functionality. For example, you can send the following message to get a personalized itinerary:
-
-```
-"I'm interested in Renaissance art and I'm on a budget. Can you create an itinerary for me for a day in Rome?"
-```
-
-The agent will then process your request and provide a personalized itinerary with recommendations for art, food, and logistics.
+1.  Open the web application in your browser.
+2.  Fill in the form with the city you want to visit, your interests, budget, and the duration of your trip.
+3.  Click the "Generate Itinerary" button.
+4.  The agent will process your request and display a complete itinerary.
+5.  You can then edit the itinerary directly on the page and save it using the "Save Changes" button.
