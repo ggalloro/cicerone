@@ -2,9 +2,7 @@ import os
 import uvicorn
 from google.adk.cli.fast_api import get_fast_api_app
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse, JSONResponse
-from pydantic import BaseModel
-from fastapi import Request
+from fastapi.responses import FileResponse
 
 # The directory containing the agent packages
 AGENT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -25,23 +23,6 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 @app.get("/")
 async def read_index():
     return FileResponse('static/index.html')
-
-class Itinerary(BaseModel):
-    session_id: str
-    content: str
-
-@app.post("/save-itinerary")
-async def save_itinerary(itinerary: Itinerary):
-    itineraries_dir = "itineraries"
-    if not os.path.exists(itineraries_dir):
-        os.makedirs(itineraries_dir)
-    
-    file_path = os.path.join(itineraries_dir, f"{itinerary.session_id}.txt")
-    with open(file_path, "w") as f:
-        f.write(itinerary.content)
-    
-    return JSONResponse(content={"message": "Itinerary saved successfully!"})
-
 
 if __name__ == "__main__":
     # Use the PORT environment variable if available (for cloud deployments)
