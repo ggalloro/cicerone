@@ -4,6 +4,8 @@ This post describes the process of creating a tool to help users plan trips. The
 
 ## Agent Implementation
 
+The complete code for this project is available on [GitHub](https://github.com/ggalloro/cicerone).
+
 The core of the application is a single travel planning agent named `Cicerone`, implemented using the `LlmAgent` class from the Google ADK.
 
 The agent is designed to understand a user's travel needs—including the destination, interests, budget, and time—from a single prompt. It then uses its tools to find relevant attractions, restaurants, and plan a route.
@@ -73,3 +75,5 @@ The backend is a FastAPI web server that exposes the ADK agent. The frontend is 
 ## Conclusion
 
 This project demonstrates how the Google Agent Development Kit can be used to build a single-agent application and expose it through a web interface. The integration of the `google_maps_grounding` tool is a key aspect, showing how grounding an agent with structured, real-world data can significantly enhance its capabilities. The use of a generalized prompt allows the agent to provide information for travel planning for any location, and the architecture can be extended with more features and tools as needed.
+
+You can find the complete code for this project on [GitHub](https://github.com/ggalloro/cicerone), where you can clone it to test it and make your own improvements.
