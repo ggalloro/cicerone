@@ -19,6 +19,7 @@ cloudsql/
 .venv/
 uploads/*
 test_*
+*.db
 
 
 
