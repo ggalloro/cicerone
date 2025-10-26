@@ -20,11 +20,11 @@ app = get_fast_api_app(
 )
 
 # Mount the static directory to serve HTML, CSS, JS
-app.mount("/static", StaticFiles(directory="cicerone-single/static"), name="static")
+app.mount("/static", StaticFiles(directory="cicerone-agent/static"), name="static")
 
 @app.get("/")
 async def read_index():
-    return FileResponse('cicerone-single/static/index.html')
+    return FileResponse('cicerone-agent/static/index.html')
 
 class Itinerary(BaseModel):
     session_id: str
@@ -32,7 +32,7 @@ class Itinerary(BaseModel):
 
 @app.post("/save-itinerary")
 async def save_itinerary(itinerary: Itinerary):
-    itineraries_dir = "cicerone-single/itineraries"
+    itineraries_dir = "cicerone-agent/itineraries"
     if not os.path.exists(itineraries_dir):
         os.makedirs(itineraries_dir)
     

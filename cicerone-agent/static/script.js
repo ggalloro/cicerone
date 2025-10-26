@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         saveButton.style.display = 'none';
         saveChangesButton.style.display = 'none';
 
-        const app_name = 'cicerone-single';
+        const app_name = 'cicerone-agent';
         const user_id = 'user-123';
         const session_id = 'session-123';
 
