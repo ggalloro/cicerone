@@ -2,6 +2,8 @@
 
 This post describes the process of creating a tool to help users plan trips. The project uses the Google Agent Development Kit (ADK) to build a personalized travel assistant. A key aspect of this project is the integration of the `google_maps_grounding` tool, which allows the agent to access real-world geographical data from Google Maps. The result is Cicerone, an agent designed to create tailored itineraries for any location.
 
+![Cicerone](img/Cicerone.png)
+
 ## Agent Implementation
 
 The complete code for this project is available on [GitHub](https://github.com/ggalloro/cicerone).
@@ -58,22 +60,33 @@ To test the agent, run the following command from the project's root directory:
 ```bash
 adk web
 ```
-This will start the ADK Web UI. Select the `cicerone-agent` from the dropdown menu and use the following prompt to test its functionality:
+This will start the ADK Web UI. Select the `cicerone-agent` from the dropdown menu and introduce yourself or just say hello, the agent should ask information on the location you want to visit, your interests, budget and trip duration.
 
-```
-I'll be in Rome from Friday, October 31st to Sunday, November 2nd. I'd like to see museums and monuments, and taste Roman cuisine at every meal. I'm on a medium budget.
-```
+![Prompt](img/agent_prompt.png)
 
-The agent should then generate a complete 3-day itinerary for Rome based on these preferences.
+After you provided the needed information the agent should then generate a complete 3-day itinerary for Rome based on these preferences.
+
+![Cicerone Response](img/cicerone_response.gif)
+
+In the ADK Web UI you can also view, in the events, the google_maps_grounding tool response `groundingMetadata` field including `groundingChunks`: arrays of objects containing the maps sources (`uri`, `placeId` and `title`):
+
+![Grounding Metadata](img/grounding_metadata.png)
 
 ## Web Application Architecture
 
-To provide a more user-friendly experience, the Cicerone agent is served through a web application.
+To provide a more user-friendly experience, I also built a simple a web application to serve the Cicerone agent.
 
 The backend is a FastAPI web server that exposes the ADK agent. The frontend is a single-page application built with HTML, JavaScript, and Bootstrap. It features a form where users can input their travel preferences. This information is then sent to the agent, and the generated itinerary is displayed on the page. The application also includes a feature to save the generated itinerary as a text file.
 
+![Cicerone Web UI](img/cicerone_webui.png)
+
+
 ## Conclusion
 
-This project demonstrates how the Google Agent Development Kit can be used to build a single-agent application and expose it through a web interface. The integration of the `google_maps_grounding` tool is a key aspect, showing how grounding an agent with structured, real-world data can significantly enhance its capabilities. The use of a generalized prompt allows the agent to provide information for travel planning for any location, and the architecture can be extended with more features and tools as needed.
+This project demonstrates how the Google Agent Development Kit can be used to build a single-agent application and expose it through a web interface. The integration of the `google_maps_grounding` tool is a key aspect, showing how grounding an agent with structured, real-world data can significantly enhance its capabilities. The use of a generalized prompt allows the agent to provide information for travel planning for any location, and the architecture can be extended with more features and tools as needed as, for example:
+- Experimenting a multi-agent architecture (i wanted to focus on Google maps grounding in this example)
+- User registration/autentication and profiles
+- Possibility to save and modify itineraries
+
 
 You can find the complete code for this project on [GitHub](https://github.com/ggalloro/cicerone), where you can clone it to test it and make your own improvements.
