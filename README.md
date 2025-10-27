@@ -1,16 +1,15 @@
 # Cicerone
 
-Cicerone is an AI-powered travel assistant that creates personalized tourist itineraries for any location (city, region, or country) in the world. It uses a single, powerful agent to understand your preferences and generate a detailed plan for your trip.
+Cicerone is an AI-based travel assistant that creates tourist itineraries for any location (city, region, or country). It uses a single agent to understand user preferences and generate a plan for a trip.
 
 ## Application Capabilities
 
 The application provides the following capabilities:
 
-- **Personalized Itineraries for Any Location:** Simply tell the agent which location you want to visit, your interests, budget, and available time, and it will generate a custom itinerary for you.
-- **Detailed Suggestions:** The agent uses Google Maps to find attractions and highly-rated restaurants that match your interests.
-- **Optimized Planning:** The itinerary includes an optimized schedule with routes, travel times, and public transportation advice (like bus or metro lines).
-- **Web Interface:** An intuitive web interface allows you to easily input your travel preferences and view the generated itinerary.
-- **Save and Modify:** You can edit the generated itinerary directly in the browser and save it for later use.
+- **Itinerary Generation for Any Location:** The agent takes a location, user interests, budget, and available time to generate an itinerary.
+- **Location Suggestions:** The agent uses Google Maps to find attractions and restaurants that match user interests.
+- **Route Planning:** The itinerary includes a schedule with routes, travel times, and public transportation advice.
+- **Web Interface:** A web interface is provided to input travel preferences and view the generated itinerary.
 
 ## Structure
 
@@ -22,7 +21,6 @@ The application is built using the Google Agent Development Kit (ADK) and served
 - **`static/`**: Contains the frontend files.
   - **`index.html`**: The main HTML page with the user interface.
   - **`script.js`**: The JavaScript code that handles user input and communication with the agent's API.
-- **`itineraries/`**: The directory where saved itineraries are stored as text files.
 - **`requirements.txt`**: Lists the Python dependencies for the project.
 - **`.env`**: Used to store environment variables, such as API keys.
 
@@ -53,5 +51,4 @@ To run the application locally, follow these steps:
 1.  Open the web application in your browser.
 2.  Fill in the form with the location you want to visit, your interests, budget, and the duration of your trip.
 3.  Click the "Generate Itinerary" button.
-4.  The agent will process your request and display a complete itinerary.
-5.  You can then edit the itinerary directly on the page and save it using the "Save Changes" button.
+4.  The agent will process your request and display an itinerary.
