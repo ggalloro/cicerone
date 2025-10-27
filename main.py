@@ -4,20 +4,14 @@ from google.adk.cli.fast_api import get_fast_api_app
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 
-# The directory containing the agent packages
+
 AGENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# In-memory session storage for simplicity
-SESSION_DB_URL = "sqlite:///./sessions.db"
-
-# Create the FastAPI app using the ADK helper
 app = get_fast_api_app(
     agents_dir=AGENT_DIR,
-    session_service_uri=SESSION_DB_URL,
     web=False
 )
 
-# Mount the static directory to serve HTML, CSS, JS
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.get("/")
