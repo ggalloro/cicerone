@@ -1,17 +1,28 @@
 document.getElementById('itinerary-form').addEventListener('submit', async function(event) {
     event.preventDefault();
 
-                    const location = document.getElementById('location').value;
-                    const interests = document.getElementById('interests').value;
-                    const budget = document.getElementById('budget').value;
-                    const time = document.getElementById('time').value;
-            
-                    const prompt = `I want to plan a trip to ${location}. My interests are ${interests}. My budget is ${budget} and I have ${time} available.`;    const responseDiv = document.getElementById('response');
+    const location = document.getElementById('location').value;
+    const interestsElement = document.getElementById('interests');
+    const interests = Array.from(interestsElement.selectedOptions).map(option => option.value);
+    const budget = document.getElementById('budget').value;
+    const time = document.getElementById('time').value;
+
+    const responseDiv = document.getElementById('response');
     responseDiv.textContent = 'Generating itinerary...';
 
     const app_name = 'cicerone-agent';
-    const user_id = 'user-123';
-    const session_id = 'session-123';
+
+    function getOrSetUserId() {
+        let userId = localStorage.getItem('cicerone_user_id');
+        if (!userId) {
+            userId = crypto.randomUUID();
+            localStorage.setItem('cicerone_user_id', userId);
+        }
+        return userId;
+    }
+
+    const user_id = getOrSetUserId();
+    const session_id = crypto.randomUUID();
 
     // Create or update the session
     await fetch(`/apps/${app_name}/users/${user_id}/sessions/${session_id}`, {
@@ -31,7 +42,7 @@ document.getElementById('itinerary-form').addEventListener('submit', async funct
             session_id: session_id,
             new_message: {
                 role: 'user',
-                parts: [{ text: prompt }]
+                parts: [{ text: JSON.stringify({location, interests, budget, time}) }]
             }
         })
     });

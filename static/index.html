@@ -19,16 +19,36 @@
                                 <input type="text" class="form-control" id="location" name="location">
                             </div>
                             <div class="mb-3">
-                                <label for="interests" class="form-label">What are your interests? (e.g., history, art, food)</label>
-                                <textarea class="form-control" id="interests" name="interests" rows="3"></textarea>
+                                <label for="interests" class="form-label">Interests</label>
+                                <select multiple class="form-select" id="interests" name="interests">
+                                    <option value="history">History</option>
+                                    <option value="art">Art</option>
+                                    <option value="food">Food</option>
+                                    <option value="adventure">Adventure</option>
+                                    <option value="shopping">Shopping</option>
+                                    <option value="technology">Technology</option>
+                                    <option value="relax">Relax</option>
+                                    <option value="sports">Sports</option>
+                                    <option value="nature">Nature</option>
+                                    <option value="music">Music</option>
+                                    <option value="nightlife">Nightlife</option>
+                                </select>
                             </div>
                             <div class="mb-3">
-                                <label for="budget" class="form-label">What is your budget?</label>
-                                <input type="text" class="form-control" id="budget" name="budget">
+                                <label for="budget" class="form-label">Budget</label>
+                                <select class="form-select" id="budget" name="budget">
+                                    <option value="low">Low</option>
+                                    <option value="medium">Medium</option>
+                                    <option value="high">High</option>
+                                </select>
                             </div>
                             <div class="mb-3">
-                                <label for="time" class="form-label">How much time do you have?</label>
-                                <input type="text" class="form-control" id="time" name="time">
+                                <label for="time" class="form-label">Time</label>
+                                <select class="form-select" id="time" name="time">
+                                    <option value="1-3 days">1-3 days</option>
+                                    <option value="4-7 days">4-7 days</option>
+                                    <option value="1-2 weeks">1-2 weeks</option>
+                                </select>
                             </div>
                             <button type="submit" class="btn btn-primary w-100">Generate Itinerary</button>
                         </form>
