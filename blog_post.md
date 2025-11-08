@@ -109,6 +109,114 @@ It features a form where users can input their travel preferences. This informat
 
 ![alt_text](img/cicerone_webui.png "image_tooltip")
 
+Here is the main code for the backend from `main.py`:
+```python
+import os
+import uvicorn
+from google.adk.cli.fast_api import get_fast_api_app
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+
+
+AGENT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+app = get_fast_api_app(
+    agents_dir=AGENT_DIR,
+    web=False
+)
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+@app.get("/")
+async def read_index():
+    return FileResponse('static/index.html')
+
+if __name__ == "__main__":
+    # Use the PORT environment variable if available (for cloud deployments)
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
+```
+
+Here is the main code for the frontend from `static/script.js`:
+```javascript
+document.getElementById('itinerary-form').addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    const location = document.getElementById('location').value;
+    const interestsElement = document.getElementById('interests');
+    const interests = Array.from(interestsElement.selectedOptions).map(option => option.value);
+    const budget = document.getElementById('budget').value;
+    const time = document.getElementById('time').value;
+
+    const responseDiv = document.getElementById('response');
+    responseDiv.textContent = 'Generating itinerary...';
+
+    const app_name = 'cicerone-agent';
+
+    function getOrSetUserId() {
+        let userId = localStorage.getItem('cicerone_user_id');
+        if (!userId) {
+            userId = crypto.randomUUID();
+            localStorage.setItem('cicerone_user_id', userId);
+        }
+        return userId;
+    }
+
+    const user_id = getOrSetUserId();
+    const session_id = crypto.randomUUID();
+
+    // Create or update the session
+    await fetch(`/apps/${app_name}/users/${user_id}/sessions/${session_id}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ state: {} })
+    });
+
+    const response = await fetch('/run_sse', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            app_name: app_name,
+            user_id: user_id,
+            session_id: session_id,
+            new_message: {
+                role: 'user',
+                parts: [{ text: JSON.stringify({location, interests, budget, time}) }]
+            }
+        })
+    });
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let result = '';
+    responseDiv.innerHTML = ''; // Clear previous results
+
+    while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        const chunk = decoder.decode(value, { stream: true });
+        
+        const lines = chunk.split('\n');
+        for (const line of lines) {
+            if (line.startsWith('data:')) {
+                try {
+                    const eventData = JSON.parse(line.substring(5));
+                    if (eventData.content && eventData.content.parts[0].text) {
+                        result += eventData.content.parts[0].text;
+                    }
+                } catch (e) {
+                    // Ignore parsing errors
+                }
+            }
+        }
+        responseDiv.innerHTML = result.replace(/\n/g, '<br>');
+    }
+});
+```
+
+
 ### **Conclusion**
 
 This project demonstrates how the Google Agent Development Kit can be used to build a single-agent application and expose it through a web interface. The integration of the `google_maps_grounding` tool is a key aspect, showing how grounding an agent with structured, real-world data can significantly enhance its capabilities. The use of a structured, dynamic prompt allows the agent to provide information for travel planning for any location, and the architecture can be extended with more features and tools as needed as, for example:
