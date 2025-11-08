@@ -18,6 +18,8 @@ A more structured travel assistant can be surely built as a multi-agent system l
 
 The agent is designed to understand a user’s travel needs from a structured JSON input containing the destination, interests, budget, and time. It then uses its tools to find relevant attractions, restaurants, and plan a route.
 
+I chose to use a structured JSON input instead of a free-text prompt for several key reasons. This approach provides better control over API token usage, leading to more predictable costs. It also ensures more reliable and consistent responses from the language model, reducing the chances of errors or hallucinations. Finally, structured inputs act as a natural security guardrail, limiting the scope of user input and preventing potential misuse.
+
 The agent’s prompt is dynamically generated from the user's JSON input, allowing it to generate itineraries for any location specified by the user. Here is the code from `agent.py` that defines the agent:
 
 ```python
