@@ -1,4 +1,4 @@
-# Cicerone: A Travel Agent with Google Maps Grounding
+# Cicerone: an ADK Travel Agent with Google Maps grounding
 
 I wanted to explore how an ADK agent would leverage Google Maps grounding so created this agent prototype to help users plan trips. The agent uses the Google Agent Development Kit (ADK) to build a personalized travel assistant. A key aspect of this project is the integration of the `google_maps_grounding` tool, which allows the agent to access real-world geographical data from Google Maps. The result is Cicerone, an agent designed to create tailored itineraries for any location.
 
@@ -87,24 +87,15 @@ To test the agent, run the following command from the project’s root directory
 adk web
 ```
 
-This will start the ADK Web UI. Select the `cicerone-agent` from the dropdown menu. Since the agent expects a structured JSON input, you can test it by sending a JSON payload in the message box:
-
-```json
-{
-  "location": "Rome",
-  "interests": ["history", "art", "food"],
-  "budget": "moderate",
-  "time": "3 days"
-}
-```
+This will start the ADK Web UI. Select the `cicerone-agent` from the dropdown menu and introduce yourself or just say hello, the agent should ask information on the location you want to visit, your interests, budget and trip duration.
 
 ![alt_text](img/agent_prompt.png "image_tooltip")
 
-After you provide the needed information the agent should then generate a complete 3-day itinerary for Rome based on these preferences.
+After you provide the needed information the agent should then generate a complete itinerary based on your preferences.
 
 ![alt_text](img/cicerone_response_part.png "image_tooltip")
 
-In the ADK Web UI you can also view, in the events, the google_maps_grounding tool response `groundingMetadata` field including `groundingChunks`: arrays of objects containing the maps sources (`uri`, `placeId` and `title`):
+In the ADK Web UI you can also view, in the events, the google_maps_grounding tool response `groundingMetadata`:
 
 ![alt_text](img/grounding_metadata.png "image_tooltip")
 
